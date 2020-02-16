@@ -1,0 +1,33 @@
+# Play1 - All Servers related tasks
+- name: Update server, create administrator_name user, create administrator_name variable
+  hosts: all
+  vars:
+    administrator_name: corpadmin
+  remote_user: ec2-user
+  become: yes
+  become_method: sudo
+  tasks:
+    - name: update all servers command
+      shell: yum update –y
+    - name: create a user
+      user:
+        name: "{{administrator_name}}"
+        password: Pattay
+# Play2 - Web Server related tasks
+- name: Install nginx
+  hosts: web1
+  remote_user: ec2-user
+  become: yes
+  become_method: sudo
+  tasks:
+    - yum: name=nginx state=present
+    - service: name=nginx enabled=yes
+# Play3 - Database Server related tasks
+#- name: Install mysql
+#  hosts: database1
+#  remote_user: ec2-user
+#  become: yes
+#  become_method: sudo
+#  tasks:
+#    -yum: name=mysql state=present
+#    -service: name=mysql enabled=yes
