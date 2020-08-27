@@ -12,7 +12,7 @@
     - name: create a user
       user:
         name: "{{administrator_name}}"
-        password: Pattay
+        password: "{{administrator_password}}"
 # Play2 - Web Server related tasks
 - name: Install nginx
   hosts: web1
